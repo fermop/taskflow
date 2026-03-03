@@ -31,7 +31,7 @@ export function AppSidebar() {
     try {
       await signOut(auth);
       toast.success("Has cerrado sesión correctamente");
-      router.push("/login"); // Redirigimos al login
+      router.push("/");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
       toast.error("Hubo un problema al cerrar sesión");
