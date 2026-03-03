@@ -99,7 +99,7 @@ export function TaskList({ projectId }: { projectId: string }) {
             />
             <button 
               onClick={() => eliminarTarea(tarea.id)}
-              className="text-zinc-400 hover:text-red-500 p-1 transition-colors"
+              className="text-zinc-400 hover:text-red-500 p-1 transition-colors cursor-pointer"
             >
               <Trash2 size={18} />
             </button>

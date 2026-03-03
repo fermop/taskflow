@@ -70,7 +70,7 @@ export function TaskForm({ projectId }: { projectId: string }) {
         <button 
           type="submit"
           disabled={estaGuardando || !tituloTarea.trim()}
-          className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center min-w-[140px]"
+          className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center min-w-[140px] cursor-pointer disabled:cursor-not-allowed"
         >
           {estaGuardando ? "Guardando..." : "Agregar Tarea"}
         </button>
@@ -93,7 +93,7 @@ export function TaskForm({ projectId }: { projectId: string }) {
           <button 
             type="button" 
             onClick={() => setArchivo(null)}
-            className="text-xs text-red-500 hover:underline"
+            className="text-xs text-red-500 hover:underline cursor-pointer"
             disabled={estaGuardando}
           >
             Quitar

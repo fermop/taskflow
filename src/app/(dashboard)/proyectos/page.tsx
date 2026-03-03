@@ -76,7 +76,7 @@ export default function ProyectosPage() {
         />
         <button 
           type="submit"
-          className="px-6 py-2 bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-colors"
+          className="px-6 py-2 bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-colors cursor-pointer"
         >
           Crear Proyecto
         </button>
