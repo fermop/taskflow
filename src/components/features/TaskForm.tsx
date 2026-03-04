@@ -58,7 +58,7 @@ export function TaskForm({ projectId }: { projectId: string }) {
 
   return (
     <form onSubmit={crearTarea} className="flex flex-col gap-4 mt-6">
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <input
           type="text"
           value={tituloTarea}
@@ -70,7 +70,7 @@ export function TaskForm({ projectId }: { projectId: string }) {
         <button 
           type="submit"
           disabled={estaGuardando || !tituloTarea.trim()}
-          className="px-6 py-2 bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center min-w-[140px] disabled:cursor-not-allowed"
+          className="px-6 py-2 bg-zinc-900 text-white rounded-md hover:bg-zinc-950 transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center min-w-[140px] disabled:cursor-not-allowed"
         >
           {estaGuardando ? "Guardando..." : "Agregar Tarea"}
         </button>

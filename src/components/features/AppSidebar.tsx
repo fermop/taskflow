@@ -17,6 +17,7 @@ import {
   SidebarMenuItem,
   SidebarFooter,
 } from "@/components/ui/sidebar";
+import { ThemeToggle } from "./ThemeToggle"; // <-- 1. Importar el componente
 
 const menuItems = [
   { title: "Inicio", url: "/", icon: Home },
@@ -30,7 +31,7 @@ export function AppSidebar() {
     try {
       await signOut(auth);
       toast.success("Has cerrado sesión correctamente");
-      router.push("/");
+      router.push("/login");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
       toast.error("Hubo un problema al cerrar sesión");
@@ -38,6 +39,7 @@ export function AppSidebar() {
   };
 
   return (
+    // Conservamos tu propiedad collapsible="icon" que funciona perfecto
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
@@ -59,12 +61,14 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       
-      {/* Agregamos el Footer del Sidebar para el botón de salir */}
       <SidebarFooter>
         <SidebarMenu>
+          {/* 2. Insertamos el Toggle de Tema aquí */}
+          <ThemeToggle />
+          
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleLogout} className="text-red-600 hover:text-red-700 hover:bg-red-50 cursor-pointer">
-              <LogOut />
+            <SidebarMenuButton onClick={handleLogout} className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30 cursor-pointer">
+              <LogOut size={18} />
               <span>Cerrar Sesión</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

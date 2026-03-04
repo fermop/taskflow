@@ -1,43 +1,43 @@
-[debug] [2026-03-03T18:18:15.682Z] ----------------------------------------------------------------------
-[debug] [2026-03-03T18:18:15.687Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\raul_\AppData\Local\pnpm\global\5\.pnpm\firebase-tools@15.8.0_@types+node@25.3.2_typescript@5.9.3\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2026-03-03T18:18:15.687Z] CLI Version:   15.8.0
-[debug] [2026-03-03T18:18:15.688Z] Platform:      win32
-[debug] [2026-03-03T18:18:15.688Z] Node Version:  v24.13.0
-[debug] [2026-03-03T18:18:15.688Z] Time:          Tue Mar 03 2026 12:18:15 GMT-0600 (hora estándar central)
-[debug] [2026-03-03T18:18:15.688Z] ----------------------------------------------------------------------
+[debug] [2026-03-04T18:42:17.399Z] ----------------------------------------------------------------------
+[debug] [2026-03-04T18:42:17.404Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\raul_\AppData\Local\pnpm\global\5\.pnpm\firebase-tools@15.8.0_@types+node@25.3.2_typescript@5.9.3\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2026-03-04T18:42:17.405Z] CLI Version:   15.8.0
+[debug] [2026-03-04T18:42:17.405Z] Platform:      win32
+[debug] [2026-03-04T18:42:17.405Z] Node Version:  v24.13.0
+[debug] [2026-03-04T18:42:17.405Z] Time:          Wed Mar 04 2026 12:42:17 GMT-0600 (hora estándar central)
+[debug] [2026-03-04T18:42:17.405Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2026-03-03T18:18:15.692Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2026-03-03T18:18:20.444Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2026-03-03T18:18:20.444Z] > authorizing via signed-in user (fernandoperezmojica@gmail.com)
-[debug] [2026-03-03T18:18:20.597Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2026-03-03T18:18:20.598Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[debug] [2026-03-03T18:18:20.771Z] java version "25.0.2" 2026-01-20 LTS
+[debug] [2026-03-04T18:42:17.409Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-03-04T18:42:21.713Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-04T18:42:21.714Z] > authorizing via signed-in user (fernandoperezmojica@gmail.com)
+[debug] [2026-03-04T18:42:21.854Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-03-04T18:42:21.854Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-03-04T18:42:21.952Z] java version "25.0.2" 2026-01-20 LTS
 Java(TM) SE Runtime Environment (build 25.0.2+10-LTS-69)
 
-[debug] [2026-03-03T18:18:20.771Z] Java HotSpot(TM) 64-Bit Server VM (build 25.0.2+10-LTS-69, mixed mode, sharing)
+[debug] [2026-03-04T18:42:21.953Z] Java HotSpot(TM) 64-Bit Server VM (build 25.0.2+10-LTS-69, mixed mode, sharing)
 
-[debug] [2026-03-03T18:18:20.799Z] Parsed Java major version: 25
+[debug] [2026-03-04T18:42:21.978Z] Parsed Java major version: 25
 [info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
-[debug] [2026-03-03T18:18:20.826Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2026-03-03T18:18:20.827Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2026-03-03T18:18:20.827Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2026-03-03T18:18:20.827Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2026-03-03T18:18:20.827Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2026-03-03T18:18:20.827Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2026-03-03T18:18:20.839Z] Write emulator hub locator at C:\Users\raul_\AppData\Local\Temp\hub-gestor-tareas-practica-20cc2.json
-[debug] [2026-03-03T18:18:20.862Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2026-03-03T18:18:20.862Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2026-03-03T18:18:20.862Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\raul_\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","gestor-tareas-practica-20cc2","--rules","C:\\Users\\raul_\\Documents\\GitHub\\gestor-tareas\\firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8080} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\raul_\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"gestor-tareas-practica-20cc2\",\"--rules\",\"C:\\\\Users\\\\raul_\\\\Documents\\\\GitHub\\\\gestor-tareas\\\\firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8080}"}}
+[debug] [2026-03-04T18:42:22.015Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-03-04T18:42:22.016Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-03-04T18:42:22.016Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-03-04T18:42:22.016Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-03-04T18:42:22.016Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-03-04T18:42:22.017Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-03-04T18:42:22.025Z] Write emulator hub locator at C:\Users\raul_\AppData\Local\Temp\hub-gestor-tareas-practica-20cc2.json
+[debug] [2026-03-04T18:42:22.044Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-04T18:42:22.044Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-03-04T18:42:22.044Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\raul_\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","gestor-tareas-practica-20cc2","--rules","C:\\Users\\raul_\\Documents\\GitHub\\gestor-tareas\\firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8080} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\raul_\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"gestor-tareas-practica-20cc2\",\"--rules\",\"C:\\\\Users\\\\raul_\\\\Documents\\\\GitHub\\\\gestor-tareas\\\\firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8080}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
 [info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2026-03-03T18:18:37.650Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-04T18:42:38.701Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
 [warn] !  Unexpected rules runtime error: WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
 WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/C:/Users/raul_/.cache/firebase/emulators/cloud-storage-rules-runtime-v1.1.3.jar)
 WARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor
 WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
  {"metadata":{"emulator":{"name":"storage"},"message":"Unexpected rules runtime error: WARNING: A terminally deprecated method in sun.misc.Unsafe has been called\nWARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.google.protobuf.UnsafeUtil$MemoryAccessor (file:/C:/Users/raul_/.cache/firebase/emulators/cloud-storage-rules-runtime-v1.1.3.jar)\nWARNING: Please consider reporting this to the maintainers of class com.google.protobuf.UnsafeUtil$MemoryAccessor\nWARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release\r\n"}}
-[debug] [2026-03-03T18:18:39.999Z] Temp file directory for storage emulator: C:\Users\raul_\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\raul_\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2026-03-03T18:18:40.036Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[debug] [2026-03-04T18:42:40.690Z] Temp file directory for storage emulator: C:\Users\raul_\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\raul_\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2026-03-04T18:42:40.718Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
 │ ✔  All emulators ready! It is now safe to connect your app. │
@@ -58,13 +58,3 @@ WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
-[debug] [2026-03-03T18:21:53.264Z] Checked if tokens are valid: false, expires at: 1772220618563
-[debug] [2026-03-03T18:21:53.264Z] Checked if tokens are valid: false, expires at: 1772220618563
-[debug] [2026-03-03T18:21:53.265Z] > refreshing access token with scopes: []
-[debug] [2026-03-03T18:21:53.269Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2026-03-03T18:21:53.269Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2026-03-03T18:21:53.412Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2026-03-03T18:21:53.412Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2026-03-03T18:21:53.427Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/gestor-tareas-practica-20cc2/adminSdkConfig [none]
-[debug] [2026-03-03T18:21:53.738Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/gestor-tareas-practica-20cc2/adminSdkConfig 200
-[debug] [2026-03-03T18:21:53.739Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/gestor-tareas-practica-20cc2/adminSdkConfig {"projectId":"gestor-tareas-practica-20cc2","storageBucket":"gestor-tareas-practica-20cc2.firebasestorage.app"}

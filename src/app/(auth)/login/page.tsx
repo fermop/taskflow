@@ -44,24 +44,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-zinc-50">
-      <div className="w-full max-w-md p-8 bg-white border border-zinc-200 rounded-2xl shadow-sm">
-        <h1 className="text-2xl font-bold text-zinc-800 mb-6 text-center">Iniciar sesión</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-zinc-50 dark:bg-zinc-900">
+      <div className="w-full max-w-md p-8 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-2xl shadow-sm">
+        <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-6 text-center">Iniciar sesión</h1>
 
         {/* Formulario de Email / Password */}
         <form onSubmit={handleEmailLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-zinc-700 mb-1">Correo electrónico</label>
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Correo electrónico</label>
             <input
               type="email"
               required
-              className="w-full px-4 py-2 border border-zinc-300 rounded-lg focus:ring-2 focus:ring-zinc-500 outline-none"
+              className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-zinc-500 outline-none bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-zinc-700 mb-1">Contraseña</label>
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Contraseña</label>
             <input
               type="password"
               required
@@ -73,7 +73,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-zinc-900 text-white rounded-lg font-semibold hover:bg-zinc-800 transition-colors disabled:opacity-50 cursor-pointer"
+            className="w-full py-2 bg-zinc-900 text-white rounded-lg font-semibold hover:bg-zinc-950 transition-colors disabled:opacity-50 cursor-pointer"
           >
             {loading ? "Iniciando..." : "Ingresar"}
           </button>
@@ -89,7 +89,7 @@ export default function LoginPage() {
         {/* Botón de Google */}
         <button
           onClick={handleGoogleLogin}
-          className="w-full py-2 bg-white text-zinc-700 border border-zinc-300 rounded-lg font-semibold hover:bg-zinc-50 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full py-2 bg-white dark:bg-zinc-900 text-zinc-700 border border-zinc-300 dark:border-zinc-600 rounded-lg font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-950 transition-colors flex items-center justify-center gap-2 cursor-pointer"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -102,7 +102,7 @@ export default function LoginPage() {
 
         {/* Enlace al registro */}
         <p className="mt-6 text-center text-sm text-zinc-600">
-          ¿No tienes cuenta? <Link href="/register" className="text-zinc-900 font-semibold hover:underline">Regístrate</Link>
+          ¿No tienes cuenta? <Link href="/register" className="text-zinc-900 dark:text-zinc-300 font-semibold hover:underline">Regístrate</Link>
         </p>
       </div>
     </div>

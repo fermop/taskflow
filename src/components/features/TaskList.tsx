@@ -86,7 +86,7 @@ export function TaskList({ projectId }: { projectId: string }) {
         <div 
           key={tarea.id} 
           className={`p-4 border rounded-lg flex justify-between items-center transition-all ${
-            tarea.isCompleted ? "bg-zinc-50 border-transparent opacity-60" : "bg-white border-zinc-200 hover:border-zinc-300 shadow-sm"
+            tarea.isCompleted ? "bg-zinc-50 dark:bg-zinc-900 border-transparent opacity-60" : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 shadow-sm"
           }`}
         >
           <div className="flex items-center gap-3">
@@ -103,7 +103,7 @@ export function TaskList({ projectId }: { projectId: string }) {
             >
               <Trash2 size={18} />
             </button>
-            <span className={`font-medium ${tarea.isCompleted ? "text-zinc-500 line-through" : "text-zinc-800"}`}>
+            <span className={`font-medium ${tarea.isCompleted ? "text-zinc-500 line-through" : "text-zinc-800 dark:text-zinc-300"}`}>
               {tarea.title}
             </span>
 
@@ -115,7 +115,7 @@ export function TaskList({ projectId }: { projectId: string }) {
               />
             )}
           </div>
-          <span className="text-xs text-zinc-400 bg-zinc-100 px-2 py-1 rounded-md">
+          <span className={`text-xs ${tarea.isCompleted ? "text-zinc-500 line-through bg-zinc-100 dark:bg-zinc-950" : "text-zinc-800 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900"} px-2 py-1 rounded-md`}>
             {new Date(tarea.createdAt).toLocaleDateString()}
           </span>
         </div>

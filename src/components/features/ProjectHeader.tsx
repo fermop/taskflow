@@ -46,7 +46,7 @@ export function ProjectHeader({ projectId }: { projectId: string }) {
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               {/* asChild permite que Shadcn use el Link nativo de Next.js */}
-              <Link href="/proyectos" className="text-zinc-500 hover:text-zinc-900">
+              <Link href="/proyectos" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-600">
                 Mis Proyectos
               </Link>
             </BreadcrumbLink>
@@ -56,7 +56,7 @@ export function ProjectHeader({ projectId }: { projectId: string }) {
           
           <BreadcrumbItem>
             {projectName ? (
-              <BreadcrumbPage className="font-medium text-zinc-900">
+              <BreadcrumbPage className="font-medium text-zinc-900 dark:text-zinc-300">
                 {projectName}
               </BreadcrumbPage>
             ) : (
@@ -68,11 +68,11 @@ export function ProjectHeader({ projectId }: { projectId: string }) {
       </Breadcrumb>
 
       {/* Título original que teníamos en la página */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-zinc-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h1 className="text-3xl font-bold text-zinc-800 dark:text-zinc-50">
           {projectName ? 'Detalles de proyecto' : <Skeleton className="h-9 w-64" />}
         </h1>
-        <span className="px-3 py-1 bg-zinc-100 text-zinc-500 rounded-full text-sm font-medium">
+        <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 rounded-full text-sm font-medium">
           ID: {projectId}
         </span>
       </div>

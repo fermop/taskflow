@@ -63,10 +63,10 @@ export default function ProyectosPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-8 text-zinc-800">Mis Proyectos</h1>
+      <h1 className="text-3xl font-bold mb-8 text-zinc-800 dark:text-zinc-50">Mis Proyectos</h1>
 
       {/* Formulario de creación */}
-      <form onSubmit={crearProyecto} className="mb-8 flex gap-4">
+      <form onSubmit={crearProyecto} className="mb-8 flex flex-col sm:flex-row gap-4">
         <input
           type="text"
           value={nombreProyecto}
@@ -76,7 +76,7 @@ export default function ProyectosPage() {
         />
         <button 
           type="submit"
-          className="px-6 py-2 bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-colors cursor-pointer"
+          className="px-6 py-2 bg-zinc-900 dark:bg-zinc-800 text-white rounded-md hover:bg-zinc-800 dark:hover:bg-zinc-950 transition-colors cursor-pointer"
         >
           Crear Proyecto
         </button>
@@ -89,9 +89,9 @@ export default function ProyectosPage() {
           <Link 
             href={`/proyectos/${proyecto.id}`} 
             key={proyecto.id} 
-            className="block p-6 bg-white border border-zinc-200 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            className="block p-6 bg-white dark:bg-zinc-800 border border-zinc-200 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer"
           >
-            <h3 className="text-xl font-semibold text-zinc-800">{proyecto.name}</h3>
+            <h3 className="text-xl font-semibold text-zinc-800 dark:text-zinc-50">{proyecto.name}</h3>
             <p className="text-sm text-zinc-500 mt-2">
               Creado: {new Date(proyecto.createdAt).toLocaleDateString()}
             </p>
