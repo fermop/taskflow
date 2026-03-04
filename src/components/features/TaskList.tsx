@@ -94,88 +94,89 @@ export function TaskList({ projectId }: { projectId: string }) {
       {tareas.map((tarea) => (
         <div 
           key={tarea.id} 
-          className={`p-4 border rounded-lg flex justify-between items-center transition-all ${
+          className={`p-4 border rounded-lg flex flex-col gap-4 transition-all ${
             tarea.isCompleted ? "bg-zinc-50 dark:bg-zinc-900 border-transparent opacity-60" : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 shadow-sm"
           }`}
-        >
-            <div className="flex items-center gap-3">
-              {/* El checkbox que dispara el UPDATE */}
-              <input 
-                type="checkbox" 
-                checked={tarea.isCompleted}
-                onChange={() => toggleCompletada(tarea.id, tarea.isCompleted)}
-                className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500 cursor-pointer"
-              />
+        >       
+          <span className={`w-fit h-fit text-xs ${tarea.isCompleted ? "text-zinc-500 line-through bg-zinc-100 dark:bg-zinc-950" : "text-zinc-800 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900"} px-2 py-1 rounded-md`}>
+            {new Date(tarea.createdAt).toLocaleDateString()}
+          </span>
+
+          <div className="flex items-center gap-3">
+            {/* El checkbox que dispara el UPDATE */}
+            <input 
+              type="checkbox" 
+              checked={tarea.isCompleted}
+              onChange={() => toggleCompletada(tarea.id, tarea.isCompleted)}
+              className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500 cursor-pointer"
+            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="text-zinc-400 hover:text-red-500 p-1 transition-colors cursor-pointer">
+                  <Trash2 size={18} />
+                </button>
+              </DialogTrigger>
+              
+              <DialogContent className="sm:max-w-md bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700">
+                <DialogTitle className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                  Confirmar eliminación
+                </DialogTitle>
+                <DialogDescription className="text-zinc-500 dark:text-zinc-400">
+                  ¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.
+                </DialogDescription>
+                
+                <DialogFooter className="flex justify-end gap-2 mt-4">
+                  <DialogClose asChild>
+                    {/* variant="outline" da un estilo secundario automático */}
+                    <Button variant="outline" className="cursor-pointer">
+                      Cancelar
+                    </Button>
+                  </DialogClose>
+
+                  <DialogClose asChild>
+                    <Button 
+                      variant="destructive" 
+                      className="cursor-pointer" 
+                      onClick={() => eliminarTarea(tarea.id)}
+                    >
+                      Eliminar
+                    </Button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+              
+            <span className={`font-medium ${tarea.isCompleted ? "text-zinc-500 line-through" : "text-zinc-800 dark:text-zinc-300"}`}>
+              {tarea.title}
+            </span>
+
+          </div>
+            
+          <div className="flex items-center gap-4">
+            {tarea.imageUrl && (
               <Dialog>
+                {/* El Trigger es la miniatura a la que le damos clic */}
                 <DialogTrigger asChild>
-                  <button className="text-zinc-400 hover:text-red-500 p-1 transition-colors cursor-pointer">
-                    <Trash2 size={18} />
-                  </button>
+                  <img 
+                    src={tarea.imageUrl} 
+                    alt="Miniatura adjunta" 
+                    className={`h-9 w-16 object-cover rounded-md border border-zinc-200 transition-all duration-300 cursor-pointer hover:opacity-80 hover:scale-[1.02] active:scale-95 ${tarea.isCompleted ? "opacity-50" : "opacity-100"}`} 
+                  />
                 </DialogTrigger>
                 
-                <DialogContent className="sm:max-w-md bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700">
-                  <DialogTitle className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-                    Confirmar eliminación
-                  </DialogTitle>
-                  <DialogDescription className="text-zinc-500 dark:text-zinc-400">
-                    ¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.
-                  </DialogDescription>
-                  
-                  <DialogFooter className="flex justify-end gap-2 mt-4">
-                    <DialogClose asChild>
-                      {/* variant="outline" da un estilo secundario automático */}
-                      <Button variant="outline" className="cursor-pointer">
-                        Cancelar
-                      </Button>
-                    </DialogClose>
+                <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none flex justify-center">
+                  <DialogTitle className="sr-only">Vista ampliada</DialogTitle>
+                  <DialogDescription className="sr-only">Imagen adjunta a la tarea: {tarea.title}</DialogDescription>
 
-                    <DialogClose asChild>
-                      <Button 
-                        variant="destructive" 
-                        className="cursor-pointer" 
-                        onClick={() => eliminarTarea(tarea.id)}
-                      >
-                        Eliminar
-                      </Button>
-                    </DialogClose>
-                  </DialogFooter>
+                  <img
+                    src={tarea.imageUrl}
+                    alt="Imagen expandida"
+                    className="w-auto h-auto max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl"
+                  />
                 </DialogContent>
               </Dialog>
-                
-              <span className={`font-medium ${tarea.isCompleted ? "text-zinc-500 line-through" : "text-zinc-800 dark:text-zinc-300"}`}>
-                {tarea.title}
-              </span>
-
-            </div>
-            
-            <div className="flex items-center gap-4">
-              {tarea.imageUrl && (
-                <Dialog>
-                  {/* El Trigger es la miniatura a la que le damos clic */}
-                  <DialogTrigger asChild>
-                    <img 
-                      src={tarea.imageUrl} 
-                      alt="Miniatura adjunta" 
-                      className={`h-9 w-16 object-cover rounded-md border border-zinc-200 transition-all duration-300 cursor-pointer hover:opacity-80 hover:scale-[1.02] active:scale-95 ${tarea.isCompleted ? "opacity-50" : "opacity-100"}`} 
-                    />
-                  </DialogTrigger>
-                  
-                  <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none flex justify-center">
-                    <DialogTitle className="sr-only">Vista ampliada</DialogTitle>
-                    <DialogDescription className="sr-only">Imagen adjunta a la tarea: {tarea.title}</DialogDescription>
-
-                    <img
-                      src={tarea.imageUrl}
-                      alt="Imagen expandida"
-                      className="w-auto h-auto max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl"
-                    />
-                  </DialogContent>
-                </Dialog>
-              )}
-              <span className={`h-fit text-xs ${tarea.isCompleted ? "text-zinc-500 line-through bg-zinc-100 dark:bg-zinc-950" : "text-zinc-800 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900"} px-2 py-1 rounded-md`}>
-                {new Date(tarea.createdAt).toLocaleDateString()}
-              </span>
-            </div>
+            )}
+          </div>
         </div>
       ))}
     </div>
