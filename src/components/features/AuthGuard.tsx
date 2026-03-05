@@ -28,7 +28,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   if (cargando) {
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center text-zinc-500">
-        <Loader2 className="w-10 h-10 text-blue-600 dark:text-blue-500 animate-spin" />
+        <Loader2 className="w-10 h-10 text-zinc-900 dark:text-zinc-50 animate-spin" />
       </div>
     );
   }
