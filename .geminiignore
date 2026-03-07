@@ -1,0 +1,30 @@
+# Dependencias y build
+node_modules/
+.next/
+out/
+build/
+.pnpm-debug.log*
+
+# Firebase (Contexto innecesario para lógica de código)
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
+
+# Archivos de entorno y secretos (Crítico)
+.env*
+*.pem
+.vercel
+
+# Multimedia y assets (No le sirven a la IA para programar)
+public/
+*.svg
+*.ico
+*.png
+*.jpg
+
+# Metadata del sistema y editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.tsbuildinfo
