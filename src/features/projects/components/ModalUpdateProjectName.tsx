@@ -49,7 +49,7 @@ export function ModalUpdateProjectName({ projectId, currentName, onSuccess }: Mo
       if (!open) setNewName(currentName); // Restaurar el nombre si se cancela y se vuelve a abrir
     }}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 cursor-pointer">
           <Pencil className="h-4 w-4" />
         </Button>
       </DialogTrigger>
