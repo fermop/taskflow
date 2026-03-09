@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { TaskDropdownMenu } from "./TaskDropdownMenu";
 import ModalConfirmDelete from "@/components/ui/ModalConfirmDelete";
 import ModalUpdateTaskInfo from "./ModalUpdateTaskInfo";
@@ -83,11 +84,10 @@ export function TaskList({ projectId }: { projectId: string }) {
           </div>
 
           <div className="flex items-center gap-3">
-            <input 
-              type="checkbox" 
+            <Checkbox
               checked={tarea.isCompleted}
-              onChange={() => toggleCompletada(tarea.id, tarea.isCompleted)}
-              className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500 cursor-pointer"
+              onCheckedChange={() => toggleCompletada(tarea.id, tarea.isCompleted)}
+              className="cursor-pointer"
             />
             <span className={`font-medium ${tarea.isCompleted ? "text-zinc-500 line-through" : "text-zinc-800 dark:text-zinc-300"}`}>
               {tarea.title}
