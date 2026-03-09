@@ -120,7 +120,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Utility: visible as flex only below sm (640px) */
+@utility mobile-only {
+  display: flex;
+
+  @media (width >=40rem) {
+    display: none;
   }
 }
