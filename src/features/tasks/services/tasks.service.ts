@@ -1,6 +1,6 @@
 import { db, storage } from "@/lib/firebase";
-import { collection, addDoc, query, where, onSnapshot, doc, updateDoc, deleteDoc, orderBy } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc, query, where, onSnapshot, doc, updateDoc, deleteDoc, orderBy, getDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 export interface Task {
   id: string;
@@ -69,17 +69,27 @@ export const tasksService = {
     const updatedData: Partial<Task> = { title };
 
     if (newFile) {
+      // Delete the previous image from Storage if one exists
+      const taskSnapshot = await getDoc(taskRef);
+      const previousImageUrl = taskSnapshot.data()?.imageUrl;
+
+      if (previousImageUrl) {
+        try {
+          const previousImageRef = ref(storage, previousImageUrl);
+          await deleteObject(previousImageRef);
+        } catch (error) {
+          console.error("Failed to delete previous image from Storage:", error);
+        }
+      }
+
+      // Upload the new image
       const storageRef = ref(storage, `tareas/${projectId}/${Date.now()}_${newFile.name}`);
       await uploadBytes(storageRef, newFile);
       const newImageUrl = await getDownloadURL(storageRef);
-      updatedData.imageUrl = newImageUrl; 
+      updatedData.imageUrl = newImageUrl;
     }
 
     await updateDoc(taskRef, updatedData);
-    
-    // 💡 Tip de Senior: En un sistema gigante en producción como DUX, 
-    // aquí agregaríamos código para eliminar la imagen vieja de Storage
-    // para no pagar almacenamiento basura. Para esta práctica, así es perfecto.
   },
 
   // 4. Eliminar
