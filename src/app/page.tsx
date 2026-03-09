@@ -6,6 +6,7 @@ import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Navbar } from "@/components/layout/Navbar";
+import { FolderKanban, ListChecks, Users, GitBranch, Star, Heart } from "lucide-react";
 
 export default function HomePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -23,24 +24,30 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-50 dark:bg-zinc-900 p-4">
-        <div className="text-center max-w-2xl">
-          <h1 className="text-5xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
-            Bienvenido a TaskFlow
+
+      {/* ── Hero ── */}
+      <section className="flex flex-col items-center justify-center min-h-screen bg-zinc-50 dark:bg-zinc-900 px-4">
+        <div className="text-center max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm text-zinc-600 dark:text-zinc-400">
+            <Star className="w-4 h-4 text-yellow-500" />
+            Proyecto open source
+          </div>
+          <h1 className="text-5xl sm:text-6xl font-bold text-zinc-900 dark:text-zinc-50 mb-6 tracking-tight">
+            Organiza tus proyectos con{" "}
+            <span className="text-blue-600 dark:text-blue-400">TaskFlow</span>
           </h1>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-            El gestor de tareas definitivo. Organiza tus proyectos de manera eficiente, 
-            segura y en tiempo real.
+          <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+            El gestor de tareas definitivo. Crea proyectos, asigna tareas y
+            colabora en tiempo real con una interfaz moderna y sencilla.
           </p>
-          
-          {/* Contenedor de altura fija para evitar saltos en la pantalla mientras carga */}
+
           <div className="flex justify-center gap-4 min-h-[50px] items-center">
             {loading ? (
               <Skeleton className="h-12 w-75 rounded-xl" />
             ) : user ? (
-              <Link 
-                href="/proyectos" 
-                className="px-8 py-3 bg-blue-600 dark:bg-blue-800 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors shadow-sm flex items-center gap-2"
+              <Link
+                href="/proyectos"
+                className="px-8 py-3 bg-blue-600 dark:bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-sm flex items-center gap-2"
               >
                 Ir a mis proyectos
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,23 +56,181 @@ export default function HomePage() {
               </Link>
             ) : (
               <>
-                <Link 
-                  href="/login" 
-                  className="px-6 py-3 bg-zinc-900 dark:bg-zinc-800 text-white font-medium rounded-lg hover:bg-zinc-800 transition-colors shadow-sm"
+                <Link
+                  href="/register"
+                  className="px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-sm"
+                >
+                  Comenzar gratis
+                </Link>
+                <Link
+                  href="/login"
+                  className="px-6 py-2 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
                 >
                   Iniciar Sesión
-                </Link>
-                <Link 
-                  href="/register" 
-                  className="px-6 py-3 bg-white text-zinc-900 font-medium rounded-lg border border-zinc-200 hover:bg-zinc-50 transition-colors"
-                >
-                  Crear Cuenta
                 </Link>
               </>
             )}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── Acerca de ── */}
+      <section id="about" className="py-24 bg-white dark:bg-zinc-950 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+              ¿Qué es TaskFlow?
+            </h2>
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+              TaskFlow es una aplicación web diseñada para ayudarte a gestionar
+              tus proyectos y tareas diarias de forma visual, rápida y
+              organizada. Todo en tiempo real, desde cualquier dispositivo.
+            </p>
+          </div>
+
+          {/* Feature cards */}
+          <div className="grid sm:grid-cols-3 gap-6 mb-20">
+            <div className="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+              <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4">
+                <FolderKanban className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                Proyectos organizados
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Crea y administra múltiples proyectos. Cada uno con su propia
+                lista de tareas, todo separado y ordenado.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+              <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center mb-4">
+                <ListChecks className="w-5 h-5 text-green-600 dark:text-green-400" />
+              </div>
+              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                Tareas con imágenes
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Agrega, edita y completa tareas. Adjunta imágenes para dar
+                contexto visual a cada actividad.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+              <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center mb-4">
+                <Users className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              </div>
+              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                Autenticación segura
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Inicia sesión con tu correo o con Google. Tus datos están
+                protegidos con Firebase Authentication.
+              </p>
+            </div>
+          </div>
+
+          {/* Preview: Proyectos */}
+          <div className="mb-16">
+            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+              Vista de Proyectos
+            </h3>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+              Visualiza todos tus proyectos de un vistazo y accede a cualquiera
+              con un solo clic.
+            </p>
+            {/* Image placeholder — replace src with your actual screenshot */}
+            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 aspect-video flex items-center justify-center overflow-hidden">
+              <img src="/projects-preview.png" alt="Vista de proyectos" className="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          {/* Preview: Tareas */}
+          <div>
+            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+              Vista de Tareas
+            </h3>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+              Gestiona las tareas dentro de cada proyecto: crea, edita, marca
+              como completadas y adjunta imágenes.
+            </p>
+            {/* Image placeholder — replace src with your actual screenshot */}
+            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 aspect-video flex items-center justify-center overflow-hidden">
+              <img src="/tasks-preview.png" alt="Vista de tareas" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Contribuye ── */}
+      <section id="contribute" className="py-24 bg-zinc-50 dark:bg-zinc-900 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="w-14 h-14 rounded-2xl bg-pink-100 dark:bg-pink-900/40 flex items-center justify-center mx-auto mb-6">
+            <Heart className="w-7 h-7 text-pink-600 dark:text-pink-400" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+            ¡Contribuye al proyecto!
+          </h2>
+          <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
+            TaskFlow es un proyecto <strong className="text-zinc-900 dark:text-zinc-200">100% open source</strong>.
+            Si te apasiona el desarrollo web, quieres practicar tus habilidades
+            o simplemente mejorar una herramienta que ya usas, tu contribución
+            es bienvenida. Desde corregir un bug hasta proponer nuevas
+            funcionalidades, toda ayuda suma.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-10 text-left">
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5">
+              <div className="flex items-center gap-3 mb-2">
+                <GitBranch className="w-5 h-5 text-zinc-500" />
+                <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
+                  Haz un fork
+                </h3>
+              </div>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                Clona el repositorio, crea una rama con tu mejora y envía un
+                pull request. Revisaremos tu código lo antes posible.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5">
+              <div className="flex items-center gap-3 mb-2">
+                <Star className="w-5 h-5 text-yellow-500" />
+                <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
+                  Deja una estrella
+                </h3>
+              </div>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                Si te gusta el proyecto, déjanos una ⭐ en GitHub. Nos ayuda a
+                llegar a más personas y motiva al equipo.
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="https://github.com/fermop/gestor-tareas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            Ver en GitHub
+          </a>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="py-8 bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+            © {new Date().getFullYear()} TaskFlow — Hecho con{" "}
+            <Heart className="w-3.5 h-3.5 inline text-pink-500" /> por la
+            comunidad open source.
+          </p>
+        </div>
+      </footer>
     </>
   );
 }
