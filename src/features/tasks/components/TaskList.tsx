@@ -19,7 +19,6 @@ export function TaskList({ projectId }: { projectId: string }) {
   const [tareas, setTareas] = useState<Task[]>([]);
   const [cargando, setCargando] = useState(true);
   
-  // En lugar de un string, guardamos toda la Tarea que se va a editar
   const [tareaAEditar, setTareaAEditar] = useState<Task | null>(null);
   const [tareaAEliminarId, setTareaAEliminarId] = useState<string | null>(null);
 
@@ -61,15 +60,15 @@ export function TaskList({ projectId }: { projectId: string }) {
     }
   };
 
-  if (cargando) return <div className="mt-8 text-sm text-zinc-500 animate-pulse">Cargando tareas...</div>;
-  if (tareas.length === 0) return <div className="mt-8 p-8 border-2 border-dashed border-zinc-200 rounded-xl text-center text-zinc-500">No hay tareas registradas. Escribe una arriba para comenzar.</div>;
+  if (cargando) return <div className="mt-8 text-sm text-stone-400 animate-pulse">Cargando tareas...</div>;
+  if (tareas.length === 0) return <div className="mt-8 p-10 border-2 border-dashed border-stone-200 dark:border-stone-800 rounded-2xl text-center text-stone-400 dark:text-stone-500">No hay tareas registradas. Escribe una arriba para comenzar.</div>;
 
   return (
     <div className="mt-8 space-y-3">
       {tareas.map((tarea) => (
-        <div key={tarea.id} className={`p-4 border rounded-lg flex flex-col gap-4 transition-all ${tarea.isCompleted ? "bg-zinc-50 dark:bg-zinc-900 border-transparent opacity-60" : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 shadow-sm"}`}>       
-          <div className="flex justify-between">
-            <span className={`w-fit h-fit text-xs ${tarea.isCompleted ? "text-zinc-500 line-through bg-zinc-100 dark:bg-zinc-950" : "text-zinc-800 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900"} px-2 py-1 rounded-md`}>
+        <div key={tarea.id} className={`p-4 rounded-xl flex flex-col gap-3 transition-all duration-200 ${tarea.isCompleted ? "bg-stone-50 dark:bg-stone-900/30 ring-1 ring-stone-100 dark:ring-stone-800/30 opacity-60" : "bg-white dark:bg-stone-900/60 ring-1 ring-stone-200/80 dark:ring-stone-800/60 hover:ring-stone-300 dark:hover:ring-stone-700 shadow-sm"}`}>       
+          <div className="flex justify-between items-start">
+            <span className={`w-fit text-xs font-mono ${tarea.isCompleted ? "text-stone-400 line-through" : "text-stone-500 dark:text-stone-400"} px-2 py-1 rounded-md bg-stone-100/80 dark:bg-stone-800/50`}>
               {new Date(tarea.createdAt).toLocaleDateString()}
             </span>
 
@@ -89,7 +88,7 @@ export function TaskList({ projectId }: { projectId: string }) {
               onCheckedChange={() => toggleCompletada(tarea.id, tarea.isCompleted)}
               className="cursor-pointer"
             />
-            <span className={`font-medium ${tarea.isCompleted ? "text-zinc-500 line-through" : "text-zinc-800 dark:text-zinc-300"}`}>
+            <span className={`font-medium ${tarea.isCompleted ? "text-stone-400 line-through" : "text-stone-800 dark:text-stone-200"}`}>
               {tarea.title}
             </span>
           </div>
@@ -98,12 +97,12 @@ export function TaskList({ projectId }: { projectId: string }) {
             {tarea.imageUrl && (
               <Dialog>
                 <DialogTrigger asChild>
-                  <img src={tarea.imageUrl} alt="Miniatura adjunta" className={`h-9 w-16 object-cover rounded-md border border-zinc-200 transition-all duration-300 cursor-pointer hover:opacity-80 hover:scale-[1.02] active:scale-95 ${tarea.isCompleted ? "opacity-50" : "opacity-100"}`} />
+                  <img src={tarea.imageUrl} alt="Miniatura adjunta" className={`h-9 w-16 object-cover rounded-lg ring-1 ring-stone-200 dark:ring-stone-700 transition-all duration-200 cursor-pointer hover:opacity-80 hover:scale-[1.02] active:scale-95 ${tarea.isCompleted ? "opacity-50" : "opacity-100"}`} />
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none flex justify-center">
                   <DialogTitle className="sr-only">Vista ampliada</DialogTitle>
                   <DialogDescription className="sr-only">Imagen adjunta a la tarea: {tarea.title}</DialogDescription>
-                  <img src={tarea.imageUrl} alt="Imagen expandida" className="w-auto h-auto max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl" />
+                  <img src={tarea.imageUrl} alt="Imagen expandida" className="w-auto h-auto max-h-[85vh] max-w-full object-contain rounded-xl shadow-2xl" />
                 </DialogContent>
               </Dialog>
             )}

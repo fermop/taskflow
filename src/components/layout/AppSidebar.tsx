@@ -40,11 +40,10 @@ export function AppSidebar() {
   };
 
   return (
-    // Conservamos tu propiedad collapsible="icon" que funciona perfecto
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Gestor de Tareas</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-stone-500 dark:text-stone-500">TaskFlow</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -64,11 +63,10 @@ export function AppSidebar() {
 
       <SidebarFooter>
         <SidebarMenu>
-          {/* 2. Insertamos el Toggle de Tema aquí */}
           <ThemeToggle />
 
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleLogout} className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30 cursor-pointer">
+            <SidebarMenuButton onClick={handleLogout} className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950/30 cursor-pointer">
               <LogOut size={18} />
               <span>Cerrar Sesión</span>
             </SidebarMenuButton>

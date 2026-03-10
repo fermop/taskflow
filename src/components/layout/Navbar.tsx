@@ -41,24 +41,24 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="max-w-4xl mx-auto fixed top-4 left-0 right-0 z-50 p-2 border border-zinc-200/50 dark:border-zinc-700/50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm rounded-full">
+    <nav className="max-w-4xl mx-auto fixed top-4 left-0 right-0 z-50 p-2 border border-stone-200/50 dark:border-stone-700/30 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md rounded-full shadow-sm shadow-stone-900/5 dark:shadow-black/20">
       <div className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+        <Link href="/" className="text-lg font-bold tracking-tight text-stone-900 dark:text-stone-100">
           TaskFlow
         </Link>
 
         {/* Desktop links — hidden on mobile */}
-        <div className="hidden sm:flex items-center gap-2">
+        <div className="hidden sm:flex items-center gap-1">
           <Link
             href="/#about"
-            className="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
           >
             Acerca de
           </Link>
           <Link
             href="/#contribute"
-            className="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
           >
             Colabora
           </Link>
@@ -68,7 +68,7 @@ export function Navbar() {
               {user ? (
                 <Link
                   href="/proyectos"
-                  className="px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors flex items-center gap-1.5"
+                  className="px-4 py-2 text-sm font-semibold rounded-lg bg-amber-600 dark:bg-amber-500 text-white hover:bg-amber-700 dark:hover:bg-amber-400 transition-all duration-200 flex items-center gap-1.5 shadow-sm"
                 >
                   Ir a mis proyectos
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,13 +79,13 @@ export function Navbar() {
                 <>
                   <Link
                     href="/login"
-                    className="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                    className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
                   >
                     Iniciar Sesión
                   </Link>
                   <Link
                     href="/register"
-                    className="px-4 py-2 text-sm font-medium rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+                    className="px-4 py-2 text-sm font-semibold rounded-lg bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-stone-200 transition-all duration-200"
                   >
                     Crear Cuenta
                   </Link>
@@ -103,7 +103,7 @@ export function Navbar() {
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <button className="p-2 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer">
+              <button className="p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors cursor-pointer">
                 <Menu className="w-5 h-5" />
                 <span className="sr-only">Abrir menú</span>
               </button>
@@ -119,7 +119,7 @@ export function Navbar() {
                     <SheetClose asChild key={link.href}>
                       <Link
                         href={link.href}
-                        className="px-4 py-3 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                        className="px-4 py-3 text-sm font-medium text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-lg transition-colors"
                       >
                         {link.label}
                       </Link>

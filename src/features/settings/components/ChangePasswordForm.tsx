@@ -20,17 +20,16 @@ export function ChangePasswordForm() {
 
   if (!user) return null;
 
-  // Google users cannot change their password from here
   if (isGoogleUser) {
     return (
-      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
+      <div className="rounded-2xl ring-1 ring-stone-200/80 dark:ring-stone-800/60 bg-white dark:bg-stone-900/60 p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-stone-800 dark:text-stone-100 mb-4">
           Contraseña
         </h2>
-        <div className="flex items-start gap-3 rounded-lg bg-zinc-100 dark:bg-zinc-800 p-4">
-          <Info className="w-5 h-5 text-zinc-500 mt-0.5 shrink-0" />
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">
-            Tu cuenta está vinculada a <strong>Google</strong>. La contraseña es
+        <div className="flex items-start gap-3 rounded-xl bg-stone-50 dark:bg-stone-800/50 p-4">
+          <Info className="w-5 h-5 text-stone-400 mt-0.5 shrink-0" />
+          <p className="text-sm text-stone-500 dark:text-stone-400">
+            Tu cuenta está vinculada a <strong className="text-stone-700 dark:text-stone-300">Google</strong>. La contraseña es
             administrada directamente por Google y no se puede cambiar desde
             aquí.
           </p>
@@ -74,8 +73,8 @@ export function ChangePasswordForm() {
   };
 
   return (
-    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm">
-      <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
+    <div className="rounded-2xl ring-1 ring-stone-200/80 dark:ring-stone-800/60 bg-white dark:bg-stone-900/60 p-6 shadow-sm">
+      <h2 className="text-lg font-semibold text-stone-800 dark:text-stone-100 mb-4">
         Cambiar contraseña
       </h2>
 
@@ -86,7 +85,6 @@ export function ChangePasswordForm() {
             id="currentPassword"
             type="password"
             required
-            className="bg-white dark:bg-zinc-800"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
           />
@@ -97,7 +95,6 @@ export function ChangePasswordForm() {
           <Input
             id="newPassword"
             type="password"
-            className="bg-white dark:bg-zinc-800"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
@@ -109,13 +106,12 @@ export function ChangePasswordForm() {
             id="confirmPassword"
             type="password"
             required
-            className="bg-white dark:bg-zinc-800"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
 
-        <Button type="submit" disabled={loading} className="w-full cursor-pointer">
+        <Button type="submit" disabled={loading} className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-stone-900 shadow-sm">
           {loading ? "Actualizando..." : "Cambiar contraseña"}
         </Button>
       </form>

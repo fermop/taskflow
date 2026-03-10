@@ -17,11 +17,9 @@ import { ModalUpdateProjectName } from "./ModalUpdateProjectName";
 export function ProjectHeader({ projectId }: { projectId: string }) {
   const [projectName, setProjectName] = useState<string | null>(null);
 
-  // EFECTO 1: Cargar la información del proyecto usando nuestro servicio
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        // Usamos la función que creamos en el paso anterior
         const project = await projectsService.getProjectById(projectId);
         if (project) {
           setProjectName(project.name);
@@ -34,29 +32,25 @@ export function ProjectHeader({ projectId }: { projectId: string }) {
     fetchProject();
   }, [projectId]);
 
-  // EFECTO 2: Actualizar el título de la pestaña en el navegador
   useEffect(() => {
-    // Usamos projectName, que es la variable que declaraste arriba
     if (projectName) {
-      document.title = `${projectName} | Gestor de Tareas`;
+      document.title = `${projectName} | TaskFlow`;
     } else {
-      document.title = "Cargando proyecto... | Gestor de Tareas";
+      document.title = "Cargando proyecto... | TaskFlow";
     }
 
-    // Al desmontar el componente (salir de la página), restauramos el título
     return () => {
-      document.title = "Gestor de Tareas";
+      document.title = "TaskFlow";
     };
-  }, [projectName]); // Se vuelve a ejecutar si projectName cambia
+  }, [projectName]);
 
   return (
     <div className="mb-8 space-y-4">
-      {/* Componente Breadcrumb de Shadcn */}
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/proyectos" className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-600">
+              <Link href="/proyectos" className="text-stone-400 hover:text-amber-600 dark:text-stone-500 dark:hover:text-amber-400 transition-colors">
                 Mis Proyectos
               </Link>
             </BreadcrumbLink>
@@ -66,7 +60,7 @@ export function ProjectHeader({ projectId }: { projectId: string }) {
 
           <BreadcrumbItem>
             {projectName ? (
-              <BreadcrumbPage className="font-medium text-zinc-900 dark:text-zinc-300">
+              <BreadcrumbPage className="font-medium text-stone-800 dark:text-stone-200">
                 {projectName}
               </BreadcrumbPage>
             ) : (
@@ -78,7 +72,7 @@ export function ProjectHeader({ projectId }: { projectId: string }) {
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold text-zinc-800 dark:text-zinc-50">
+          <h1 className="text-3xl font-bold text-stone-800 dark:text-stone-50 tracking-tight">
             {projectName ? projectName : <Skeleton className="h-9 w-64" />}
           </h1>
           {projectName && (

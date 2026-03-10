@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogFooter, DialogTitle } from "@/components/u
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Paperclip } from "lucide-react";
+import { Paperclip, X } from "lucide-react";
 import { Task } from "../services/tasks.service";
 
 interface ModalUpdateTaskInfoProps {
@@ -30,7 +30,7 @@ export default function ModalUpdateTaskInfo({ task, isOpen, onClose, onConfirm }
   const hasChanges = () => {
     if (!task) return false;
     const titleChanged = title.trim() !== task.title;
-    const fileChanged = file !== null; // Si hay un archivo seleccionado, hubo cambio
+    const fileChanged = file !== null;
     return titleChanged || fileChanged;
   };
 
@@ -47,8 +47,8 @@ export default function ModalUpdateTaskInfo({ task, isOpen, onClose, onConfirm }
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700">
-        <DialogTitle className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+      <DialogContent className="sm:max-w-md bg-white dark:bg-stone-900 ring-1 ring-stone-200/80 dark:ring-stone-800/60 border-none">
+        <DialogTitle className="text-lg font-semibold text-stone-800 dark:text-stone-100">
           Actualizar tarea
         </DialogTitle>
         
@@ -60,15 +60,14 @@ export default function ModalUpdateTaskInfo({ task, isOpen, onClose, onConfirm }
               value={title} 
               onChange={(e) => setTitle(e.target.value)}
               disabled={isSaving}
-              className="bg-white dark:bg-zinc-800"
             />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label>Imagen adjunta (opcional)</Label>
             <div className="flex items-center gap-2 mt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-                <Paperclip size={18} />
+              <label className="flex items-center gap-2 cursor-pointer text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200 transition-colors">
+                <Paperclip size={16} />
                 <span className="truncate max-w-50">
                   {file ? file.name : (task?.imageUrl ? "Cambiar imagen actual" : "Adjuntar nueva imagen")}
                 </span>
@@ -84,9 +83,10 @@ export default function ModalUpdateTaskInfo({ task, isOpen, onClose, onConfirm }
                 <button 
                   type="button" 
                   onClick={() => setFile(null)}
-                  className="text-xs text-red-500 hover:underline cursor-pointer"
+                  className="text-xs text-red-500 hover:text-red-600 dark:text-red-400 flex items-center gap-1 cursor-pointer transition-colors"
                   disabled={isSaving}
                 >
+                  <X size={12} />
                   Quitar
                 </button>
               )}
@@ -98,7 +98,7 @@ export default function ModalUpdateTaskInfo({ task, isOpen, onClose, onConfirm }
           <Button variant="outline" className="cursor-pointer" onClick={onClose} disabled={isSaving}>
             Cancelar
           </Button>
-          <Button className="cursor-pointer" onClick={handleGuardar} disabled={isSaving || !title.trim() || !hasChanges()}>
+          <Button className="cursor-pointer bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-stone-900" onClick={handleGuardar} disabled={isSaving || !title.trim() || !hasChanges()}>
             {isSaving ? "Guardando..." : "Guardar cambios"}
           </Button>
         </DialogFooter>

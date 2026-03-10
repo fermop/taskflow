@@ -12,7 +12,7 @@ export default function DashboardLayout({
     <AuthGuard>
       <SidebarProvider>
         <AppSidebar />
-        <main className="flex-1 min-h-screen bg-zinc-50 dark:bg-zinc-950 relative">
+        <main className="flex-1 min-h-screen bg-stone-50 dark:bg-stone-950 relative">
           <div className="absolute top-4 left-4">
             <SidebarTrigger />
           </div>

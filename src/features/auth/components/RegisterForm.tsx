@@ -52,9 +52,12 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-zinc-50 dark:bg-zinc-900">
-      <div className="w-full max-w-md p-8 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-2xl shadow-sm">
-        <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-6 text-center">Crear cuenta</h1>
+    <div className="relative flex flex-col items-center justify-center min-h-screen p-4 bg-stone-50 dark:bg-[oklch(0.14_0.005_60)] overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-amber-400/10 dark:bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative w-full max-w-md p-8 bg-white dark:bg-stone-900/80 ring-1 ring-stone-200/80 dark:ring-stone-800/60 rounded-2xl shadow-xl shadow-stone-900/5 dark:shadow-black/20 backdrop-blur-sm z-10">
+        <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100 mb-6 text-center tracking-tight">Crear cuenta</h1>
 
         <form onSubmit={handleRegister} className="space-y-4">
           {/* Nombre */}
@@ -64,7 +67,6 @@ export function RegisterForm() {
               id="name"
               type="text"
               required
-              className="bg-white dark:bg-zinc-800"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -77,7 +79,6 @@ export function RegisterForm() {
               id="email"
               type="email"
               required
-              className="bg-white dark:bg-zinc-800"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -91,14 +92,14 @@ export function RegisterForm() {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 required
-                className="bg-white dark:bg-zinc-800 pr-10"
+                className="pr-10"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-3 flex items-center pr-3 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 cursor-pointer"
+                className="absolute inset-y-0 right-3 flex items-center pr-3 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 cursor-pointer transition-colors"
                 tabIndex={-1}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -114,14 +115,14 @@ export function RegisterForm() {
                 id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
                 required
-                className="bg-white dark:bg-zinc-800 pr-10"
+                className="pr-10"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute inset-y-0 right-3 flex items-center pr-3 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 cursor-pointer"
+                className="absolute inset-y-0 right-3 flex items-center pr-3 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 cursor-pointer transition-colors"
                 tabIndex={-1}
               >
                 {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -132,14 +133,14 @@ export function RegisterForm() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full cursor-pointer"
+            className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-stone-900 shadow-sm"
           >
             {loading ? "Registrando..." : "Registrarse"}
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-zinc-600 dark:text-zinc-400">
-          ¿Ya tienes cuenta? <Link href="/login" className="text-zinc-900 dark:text-zinc-300 font-semibold hover:underline">Inicia sesión</Link>
+        <p className="mt-6 text-center text-sm text-stone-500 dark:text-stone-400">
+          ¿Ya tienes cuenta? <Link href="/login" className="text-amber-600 dark:text-amber-400 font-semibold hover:underline">Inicia sesión</Link>
         </p>
       </div>
     </div>

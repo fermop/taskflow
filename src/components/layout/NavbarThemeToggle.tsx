@@ -1,35 +1,19 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Sun, Moon } from "lucide-react";
 
 export function NavbarThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <Button variant="ghost" size="icon" className="h-9 w-9" disabled>
-        <div className="w-4 h-4 rounded-full bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
-      </Button>
-    );
-  }
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      className="h-9 w-9 cursor-pointer"
+    <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="p-2 text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60"
+      aria-label="Cambiar tema"
     >
-      {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-      <span className="sr-only">Cambiar tema</span>
-    </Button>
+      <Sun className="w-4 h-4 hidden dark:block" />
+      <Moon className="w-4 h-4 block dark:hidden" />
+    </button>
   );
 }

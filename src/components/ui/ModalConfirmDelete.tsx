@@ -16,11 +16,11 @@ interface ModalConfirmDeleteProps {
 export default function ModalConfirmDelete({ isOpen, onClose, onConfirm }: ModalConfirmDeleteProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700">
-        <DialogTitle className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+      <DialogContent className="sm:max-w-md bg-white dark:bg-stone-900 ring-1 ring-stone-200/80 dark:ring-stone-800/60 border-none">
+        <DialogTitle className="text-lg font-semibold text-stone-800 dark:text-stone-100">
           Confirmar eliminación
         </DialogTitle>
-        <DialogDescription className="text-zinc-500 dark:text-zinc-400">
+        <DialogDescription className="text-stone-500 dark:text-stone-400">
           ¿Estás seguro de que quieres eliminar esta tarea? Esta acción no se puede deshacer.
         </DialogDescription>
         

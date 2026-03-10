@@ -1,39 +1,21 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import { Sun, Moon } from "lucide-react";
+import { SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [montado, setMontado] = useState(false);
-
-  // Esperamos a que el componente se monte en el cliente para saber el tema actual
-  useEffect(() => {
-    setMontado(true);
-  }, []);
-
-  if (!montado) {
-    return (
-      <SidebarMenuItem>
-        <SidebarMenuButton>
-          {/* Un pequeño esqueleto mientras detecta el tema */}
-          <div className="w-4 h-4 rounded-full bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
-          <span>Cargando tema...</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    );
-  }
 
   return (
     <SidebarMenuItem>
       <SidebarMenuButton
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors cursor-pointer"
+        className="cursor-pointer text-stone-600 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-400"
       >
-        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-        <span>{theme === "dark" ? "Modo Claro" : "Modo Oscuro"}</span>
+        <Sun className="w-4 h-4 hidden dark:block" />
+        <Moon className="w-4 h-4 block dark:hidden" />
+        <span>{theme === "dark" ? "Modo claro" : "Modo oscuro"}</span>
       </SidebarMenuButton>
     </SidebarMenuItem>
   );

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,6 +13,7 @@ import { FolderKanban, ListChecks, Users, GitBranch, Star, Heart } from "lucide-
 export default function HomePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -26,17 +29,20 @@ export default function HomePage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="flex flex-col items-center justify-center min-h-screen bg-zinc-50 dark:bg-zinc-900 px-4">
-        <div className="text-center max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm text-zinc-600 dark:text-zinc-400">
-            <Star className="w-4 h-4 text-yellow-500" />
+      <section className="relative flex flex-col items-center justify-center min-h-screen bg-stone-50 dark:bg-[oklch(0.14_0.005_60)] px-4 overflow-hidden">
+        {/* Ambient glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-amber-400/15 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative text-center max-w-3xl z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-stone-200 dark:border-stone-700/50 bg-white/80 dark:bg-stone-800/60 text-sm text-stone-600 dark:text-stone-400 backdrop-blur-sm">
+            <Star className="w-4 h-4 text-amber-500" />
             Proyecto open source
           </div>
-          <h1 className="text-5xl sm:text-6xl font-bold text-zinc-900 dark:text-zinc-50 mb-6 tracking-tight">
+          <h1 className="text-5xl sm:text-6xl font-bold text-stone-900 dark:text-stone-50 mb-6 tracking-tight leading-[1.1]">
             Organiza tus proyectos con{" "}
-            <span className="text-blue-600 dark:text-blue-400">TaskFlow</span>
+            <span className="text-amber-600 dark:text-amber-400">TaskFlow</span>
           </h1>
-          <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-stone-500 dark:text-stone-400 mb-10 max-w-2xl mx-auto leading-relaxed">
             El gestor de tareas definitivo. Crea proyectos, asigna tareas y
             colabora en tiempo real con una interfaz moderna y sencilla.
           </p>
@@ -47,7 +53,7 @@ export default function HomePage() {
             ) : user ? (
               <Link
                 href="/proyectos"
-                className="px-8 py-3 bg-blue-600 dark:bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-sm flex items-center gap-2"
+                className="px-8 py-3 bg-amber-600 dark:bg-amber-500 text-white font-semibold rounded-xl hover:bg-amber-700 dark:hover:bg-amber-400 transition-all duration-200 shadow-md shadow-amber-600/20 dark:shadow-amber-500/20 flex items-center gap-2 hover:shadow-lg hover:shadow-amber-600/25"
               >
                 Ir a mis proyectos
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,13 +64,13 @@ export default function HomePage() {
               <>
                 <Link
                   href="/register"
-                  className="px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-sm"
+                  className="px-6 py-2.5 bg-amber-600 dark:bg-amber-500 text-white font-semibold rounded-xl hover:bg-amber-700 dark:hover:bg-amber-400 transition-all duration-200 shadow-md shadow-amber-600/20 dark:shadow-amber-500/20 hover:shadow-lg"
                 >
                   Comenzar gratis
                 </Link>
                 <Link
                   href="/login"
-                  className="px-6 py-2 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+                  className="px-6 py-2.5 bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-medium rounded-xl border border-stone-200 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700 transition-all duration-200 hover:border-stone-300"
                 >
                   Iniciar Sesión
                 </Link>
@@ -75,13 +81,13 @@ export default function HomePage() {
       </section>
 
       {/* ── Acerca de ── */}
-      <section id="about" className="py-24 bg-white dark:bg-zinc-950 px-4">
+      <section id="about" className="py-24 bg-white dark:bg-stone-950 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 dark:text-stone-50 mb-4 tracking-tight">
               ¿Qué es TaskFlow?
             </h2>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-stone-500 dark:text-stone-400 max-w-2xl mx-auto leading-relaxed">
               TaskFlow es una aplicación web diseñada para ayudarte a gestionar
               tus proyectos y tareas diarias de forma visual, rápida y
               organizada. Todo en tiempo real, desde cualquier dispositivo.
@@ -89,41 +95,41 @@ export default function HomePage() {
           </div>
 
           {/* Feature cards */}
-          <div className="grid sm:grid-cols-3 gap-6 mb-20">
-            <div className="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
-              <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4">
-                <FolderKanban className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <div className="grid sm:grid-cols-3 gap-5 mb-20">
+            <div className="rounded-2xl ring-1 ring-stone-200/80 dark:ring-stone-800 bg-stone-50/50 dark:bg-stone-900/50 p-6 hover:ring-stone-300 dark:hover:ring-stone-700 transition-all duration-300 hover:-translate-y-0.5">
+              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-4">
+                <FolderKanban className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+              <h3 className="font-semibold text-stone-900 dark:text-stone-100 mb-2">
                 Proyectos organizados
               </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
                 Crea y administra múltiples proyectos. Cada uno con su propia
                 lista de tareas, todo separado y ordenado.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
-              <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center mb-4">
-                <ListChecks className="w-5 h-5 text-green-600 dark:text-green-400" />
+            <div className="rounded-2xl ring-1 ring-stone-200/80 dark:ring-stone-800 bg-stone-50/50 dark:bg-stone-900/50 p-6 hover:ring-stone-300 dark:hover:ring-stone-700 transition-all duration-300 hover:-translate-y-0.5">
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
+                <ListChecks className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
               </div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+              <h3 className="font-semibold text-stone-900 dark:text-stone-100 mb-2">
                 Tareas con imágenes
               </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
                 Agrega, edita y completa tareas. Adjunta imágenes para dar
                 contexto visual a cada actividad.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
-              <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center mb-4">
-                <Users className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+            <div className="rounded-2xl ring-1 ring-stone-200/80 dark:ring-stone-800 bg-stone-50/50 dark:bg-stone-900/50 p-6 hover:ring-stone-300 dark:hover:ring-stone-700 transition-all duration-300 hover:-translate-y-0.5">
+              <div className="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center mb-4">
+                <Users className="w-5 h-5 text-violet-600 dark:text-violet-400" />
               </div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+              <h3 className="font-semibold text-stone-900 dark:text-stone-100 mb-2">
                 Autenticación segura
               </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
                 Inicia sesión con tu correo o con Google. Tus datos están
                 protegidos con Firebase Authentication.
               </p>
@@ -132,47 +138,71 @@ export default function HomePage() {
 
           {/* Preview: Proyectos */}
           <div className="mb-16">
-            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+            <h3 className="text-xl font-semibold text-stone-900 dark:text-stone-100 mb-2">
               Vista de Proyectos
             </h3>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-stone-500 dark:text-stone-400 mb-6">
               Visualiza todos tus proyectos de un vistazo y accede a cualquiera
               con un solo clic.
             </p>
-            {/* Image placeholder — replace src with your actual screenshot */}
-            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 aspect-video flex items-center justify-center overflow-hidden">
-              <img src="/projects-preview.png" alt="Vista de proyectos" className="w-full h-full object-cover" />
+            <div className="rounded-2xl ring-1 ring-stone-200 dark:ring-stone-800 bg-stone-100/50 dark:bg-stone-900/50 aspect-video relative overflow-hidden">
+              {/* Light Mode Image */}
+              <Image
+                src="/projects-preview-light.png"
+                alt="Vista de proyectos"
+                fill
+                className="object-cover dark:hidden"
+              />
+              {/* Dark Mode Image */}
+              <Image
+                src="/projects-preview-dark.png"
+                alt="Vista de proyectos"
+                fill
+                className="hidden dark:block object-cover"
+              />
             </div>
           </div>
 
           {/* Preview: Tareas */}
           <div>
-            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+            <h3 className="text-xl font-semibold text-stone-900 dark:text-stone-100 mb-2">
               Vista de Tareas
             </h3>
-            <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+            <p className="text-stone-500 dark:text-stone-400 mb-6">
               Gestiona las tareas dentro de cada proyecto: crea, edita, marca
               como completadas y adjunta imágenes.
             </p>
-            {/* Image placeholder — replace src with your actual screenshot */}
-            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 aspect-video flex items-center justify-center overflow-hidden">
-              <img src="/tasks-preview.png" alt="Vista de tareas" className="w-full h-full object-cover" />
+            <div className="rounded-2xl ring-1 ring-stone-200 dark:ring-stone-800 bg-stone-100/50 dark:bg-stone-900/50 aspect-video relative overflow-hidden">
+              {/* Light Mode Image */}
+              <Image
+                src="/tasks-preview-light.png"
+                alt="Vista de tareas"
+                fill
+                className="object-cover dark:hidden"
+              />
+              {/* Dark Mode Image */}
+              <Image
+                src="/tasks-preview-dark.png"
+                alt="Vista de tareas"
+                fill
+                className="hidden dark:block object-cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Contribuye ── */}
-      <section id="contribute" className="py-24 bg-zinc-50 dark:bg-zinc-900 px-4">
+      <section id="contribute" className="py-24 bg-stone-50 dark:bg-[oklch(0.14_0.005_60)] px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="w-14 h-14 rounded-2xl bg-pink-100 dark:bg-pink-900/40 flex items-center justify-center mx-auto mb-6">
+          <div className="w-14 h-14 rounded-2xl bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mx-auto mb-6">
             <Heart className="w-7 h-7 text-pink-600 dark:text-pink-400" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 dark:text-stone-50 mb-4 tracking-tight">
             ¡Contribuye al proyecto!
           </h2>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
-            TaskFlow es un proyecto <strong className="text-zinc-900 dark:text-zinc-200">100% open source</strong>.
+          <p className="text-lg text-stone-500 dark:text-stone-400 mb-8 leading-relaxed">
+            TaskFlow es un proyecto <strong className="text-stone-800 dark:text-stone-200">100% open source</strong>.
             Si te apasiona el desarrollo web, quieres practicar tus habilidades
             o simplemente mejorar una herramienta que ya usas, tu contribución
             es bienvenida. Desde corregir un bug hasta proponer nuevas
@@ -180,27 +210,27 @@ export default function HomePage() {
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 mb-10 text-left">
-            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5">
+            <div className="rounded-xl ring-1 ring-stone-200 dark:ring-stone-800 bg-white dark:bg-stone-900/60 p-5 hover:ring-stone-300 dark:hover:ring-stone-700 transition-all duration-200">
               <div className="flex items-center gap-3 mb-2">
-                <GitBranch className="w-5 h-5 text-zinc-500" />
-                <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
+                <GitBranch className="w-5 h-5 text-stone-400" />
+                <h3 className="font-semibold text-stone-900 dark:text-stone-100">
                   Haz un fork
                 </h3>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm text-stone-500 dark:text-stone-400">
                 Clona el repositorio, crea una rama con tu mejora y envía un
                 pull request. Revisaremos tu código lo antes posible.
               </p>
             </div>
 
-            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5">
+            <div className="rounded-xl ring-1 ring-stone-200 dark:ring-stone-800 bg-white dark:bg-stone-900/60 p-5 hover:ring-stone-300 dark:hover:ring-stone-700 transition-all duration-200">
               <div className="flex items-center gap-3 mb-2">
-                <Star className="w-5 h-5 text-yellow-500" />
-                <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
+                <Star className="w-5 h-5 text-amber-500" />
+                <h3 className="font-semibold text-stone-900 dark:text-stone-100">
                   Deja una estrella
                 </h3>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm text-stone-500 dark:text-stone-400">
                 Si te gusta el proyecto, déjanos una ⭐ en GitHub. Nos ayuda a
                 llegar a más personas y motiva al equipo.
               </p>
@@ -211,7 +241,7 @@ export default function HomePage() {
             href="https://github.com/fermop/gestor-tareas"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 font-semibold rounded-xl hover:bg-stone-800 dark:hover:bg-stone-200 transition-all duration-200"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
@@ -222,9 +252,9 @@ export default function HomePage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="py-8 bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 px-4">
+      <footer className="py-8 bg-white dark:bg-stone-950 border-t border-stone-200/80 dark:border-stone-800/50 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-sm text-stone-400 dark:text-stone-500">
             © {new Date().getFullYear()} TaskFlow — Hecho con{" "}
             <Heart className="w-3.5 h-3.5 inline text-pink-500" /> por la
             comunidad open source.
