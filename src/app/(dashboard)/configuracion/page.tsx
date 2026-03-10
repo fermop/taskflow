@@ -1,7 +1,7 @@
 import { SettingsView } from "@/features/settings/components/SettingsView";
 
 export const metadata = {
-  title: "Configuración | Gestor de Tareas",
+  title: "Configuración | TaskFlow",
 };
 
 export default function ConfiguracionPage() {

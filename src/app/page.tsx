@@ -42,7 +42,7 @@ export default function HomePage() {
             <span className="text-amber-600 dark:text-amber-400">TaskFlow</span>
           </h1>
           <p className="text-lg sm:text-xl text-stone-500 dark:text-stone-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            El gestor de tareas definitivo. Crea proyectos, asigna tareas y
+            El TaskFlow definitivo. Crea proyectos, asigna tareas y
             colabora en tiempo real con una interfaz moderna y sencilla.
           </p>
 

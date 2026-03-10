@@ -2,7 +2,7 @@ import { LoginForm } from "@/features/auth/components/LoginForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Iniciar Sesión | Gestor de Tareas",
+  title: "Iniciar Sesión | TaskFlow",
 };
 
 export default function LoginPage() {

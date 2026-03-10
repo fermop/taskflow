@@ -8,7 +8,7 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "TaskFlow — Gestor de Tareas",
+  title: "TaskFlow",
   description: "Organiza tus proyectos y tareas diarias con una interfaz moderna y colaborativa.",
 };
 
