@@ -15,6 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -26,10 +27,12 @@ const menuItems = [
 
 export function AppSidebar() {
   const router = useRouter();
+  const { setOpenMobile, isMobile } = useSidebar();
 
   const handleLogout = async () => {
     try {
       await authService.logout();
+      if (isMobile) setOpenMobile(false);
       toast.success("Has cerrado sesión correctamente");
       router.push("/");
     } catch (error) {
@@ -47,7 +50,12 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    onClick={() => {
+                      if (isMobile) setOpenMobile(false);
+                    }}
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
