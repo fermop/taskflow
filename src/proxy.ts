@@ -7,7 +7,7 @@ const protectedPaths = ["/proyectos", "/configuracion"];
 // Routes only for unauthenticated users
 const authPaths = ["/login", "/register"];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const hasSession = request.cookies.has("__session");
 

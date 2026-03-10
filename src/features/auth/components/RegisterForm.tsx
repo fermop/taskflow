@@ -45,13 +45,13 @@ export function RegisterForm() {
       await authService.registerWithEmail(email, password, name.trim());
       toast.success("Cuenta creada exitosamente");
       router.push("/proyectos");
-    } catch (error: any) {
-      if (error.code === "auth/email-already-in-use") {
-        toast.error("Este correo ya está registrado");
-      } else {
-        toast.error("Error al crear la cuenta");
-      }
-    } finally {
+    } catch (error: unknown) {
+          if ((error as any).code === "auth/email-already-in-use") {
+            toast.error("Este correo ya está registrado");
+          } else {
+            toast.error("Error al registrarse");
+          }
+        } finally {
       setLoading(false);
     }
   };

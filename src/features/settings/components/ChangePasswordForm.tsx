@@ -59,10 +59,10 @@ export function ChangePasswordForm() {
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error al cambiar contraseña:", error);
 
-      if (error.code === "auth/wrong-password" || error.code === "auth/invalid-credential") {
+      if ((error as any).code === "auth/wrong-password" || (error as any).code === "auth/invalid-credential") {
         toast.error("La contraseña actual es incorrecta.");
       } else {
         toast.error("Hubo un error al cambiar la contraseña.");

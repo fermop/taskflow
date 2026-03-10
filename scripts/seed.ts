@@ -2,7 +2,7 @@ import { loadEnvConfig } from '@next/env';
 import { collection, addDoc } from "firebase/firestore";
 
 loadEnvConfig(process.cwd());
-process.env.NODE_ENV = 'development';
+(process.env as any).NODE_ENV = 'development';
 
 async function main() {
   console.log("🌱 Iniciando el proceso de seeding en Firestore...");

@@ -25,7 +25,7 @@ export function LoginForm() {
       await authService.loginWithEmail(email, password);
       toast.success("Has iniciado sesión correctamente");
       router.push("/proyectos");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       toast.error("Correo o contraseña incorrectos");
     } finally {
