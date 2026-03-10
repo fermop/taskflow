@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { authService } from "../services/auth.service";
+import { validateUserName, validatePassword, ValidationError } from "@/lib/validators";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -23,8 +24,13 @@ export function RegisterForm() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (password.length < 6) {
-      toast.error("La contraseña debe tener al menos 6 caracteres.");
+    try {
+      validateUserName(name);
+      validatePassword(password);
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        toast.error(error.message);
+      }
       return;
     }
 
@@ -36,11 +42,10 @@ export function RegisterForm() {
     setLoading(true);
 
     try {
-      await authService.registerWithEmail(email, password, name);
+      await authService.registerWithEmail(email, password, name.trim());
       toast.success("Cuenta creada exitosamente");
       router.push("/proyectos");
     } catch (error: any) {
-      console.error(error);
       if (error.code === "auth/email-already-in-use") {
         toast.error("Este correo ya está registrado");
       } else {
