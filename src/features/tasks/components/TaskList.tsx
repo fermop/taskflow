@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { auth } from "@/lib/firebase";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { useState } from "react";
 import { tasksService, Task } from "../services/tasks.service";
 import { ValidationError } from "@/lib/validators";
 import { toast } from "sonner";
@@ -14,50 +12,65 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import { TaskDropdownMenu } from "./TaskDropdownMenu";
 import ModalConfirmDelete from "@/components/ui/ModalConfirmDelete";
 import ModalUpdateTaskInfo from "./ModalUpdateTaskInfo";
 
-export function TaskList({ projectId }: { projectId: string }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [tareas, setTareas] = useState<Task[]>([]);
-  const [cargando, setCargando] = useState(true);
-  
+interface TaskListProps {
+  projectId: string;
+  tareas: Task[];
+  isLoading: boolean;
+  hasMore: boolean;
+  isFetchingMore: boolean;
+  onLoadMore: () => void;
+  onTasksChange: (tasks: Task[]) => void;
+}
+
+export function TaskList({ 
+  projectId, 
+  tareas, 
+  isLoading, 
+  hasMore, 
+  isFetchingMore, 
+  onLoadMore, 
+  onTasksChange 
+}: TaskListProps) {
   const [tareaAEditar, setTareaAEditar] = useState<Task | null>(null);
   const [tareaAEliminarId, setTareaAEliminarId] = useState<string | null>(null);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (!user) return;
-
-    const unsubscribe = tasksService.subscribeToTasks(projectId, user.uid, (tareasActualizadas) => {
-      setTareas(tareasActualizadas);
-      setCargando(false);
-    });
-    return () => unsubscribe();
-  }, [projectId, user]);
-
   const toggleCompletada = async (tareaId: string, estadoActual: boolean) => {
+    // Optimistic UI toggle and sort
+    const updatedTasks = tareas.map(t => t.id === tareaId ? { ...t, isCompleted: !estadoActual } : t);
+    updatedTasks.sort((a, b) => (a.isCompleted === b.isCompleted) ? 0 : a.isCompleted ? 1 : -1);
+    onTasksChange(updatedTasks);
+
     try {
       await tasksService.toggleCompletion(tareaId, estadoActual);
     } catch (error) {
+      // Revert optimism
+      const revertedTasks = tareas.map(t => t.id === tareaId ? { ...t, isCompleted: estadoActual } : t);
+      revertedTasks.sort((a, b) => (a.isCompleted === b.isCompleted) ? 0 : a.isCompleted ? 1 : -1);
+      onTasksChange(revertedTasks);
+      
       const message = error instanceof ValidationError ? error.message : "No se pudo actualizar la tarea";
       toast.error(message);
     }
   };
 
   const eliminarTarea = async (id: string) => {
+    // Optimistic deletion
+    const oldTasks = [...tareas];
+    onTasksChange(tareas.filter(t => t.id !== id));
+    setTareaAEliminarId(null);
+
     try {
       await tasksService.deleteTask(id);
       toast.success("Tarea eliminada");
-      setTareaAEliminarId(null);
     } catch (error) {
+      // Revert optimism
+      onTasksChange(oldTasks);
       const message = error instanceof ValidationError ? error.message : "No se pudo eliminar";
       toast.error(message);
     }
@@ -65,17 +78,26 @@ export function TaskList({ projectId }: { projectId: string }) {
 
   const guardarEdicionTarea = async (newTitle: string, newFile: File | null, removeImage: boolean) => {
     if (!tareaAEditar) return;
+    
+    // Optimistic UI for string title changes
+    const oldTasks = [...tareas];
+    const updatedTasks = tareas.map(t => t.id === tareaAEditar.id ? { ...t, title: newTitle } : t);
+    // (If changing image we just wait for the reload on next page refresh to see the thumbnail, 
+    // or we could mock a local object URL, but simpler to just show title instantly)
+    onTasksChange(updatedTasks);
+
     try {
       await tasksService.updateTask(tareaAEditar.id, newTitle, projectId, newFile, removeImage);
       toast.success("Tarea actualizada correctamente");
       setTareaAEditar(null);
     } catch (error) {
+      onTasksChange(oldTasks);
       const message = error instanceof ValidationError ? error.message : "Error al actualizar la tarea";
       toast.error(message);
     }
   };
 
-  if (cargando) return <div className="mt-8 text-sm text-stone-400 animate-pulse">Cargando tareas...</div>;
+  if (isLoading) return <div className="mt-8 text-sm text-stone-400 animate-pulse flex items-center"><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Cargando tareas...</div>;
   if (tareas.length === 0) return <div className="mt-8 p-10 border-2 border-dashed border-stone-200 dark:border-stone-800 rounded-2xl text-center text-stone-400 dark:text-stone-500">No hay tareas registradas. Escribe una arriba para comenzar.</div>;
 
   return (
@@ -124,6 +146,26 @@ export function TaskList({ projectId }: { projectId: string }) {
           </div>
         </div>
       ))}
+
+      {hasMore && (
+        <div className="flex justify-center mt-6">
+          <Button
+            variant="outline"
+            onClick={onLoadMore}
+            disabled={isFetchingMore}
+            className="cursor-pointer border-stone-200 dark:border-stone-800 hover:bg-stone-50 dark:hover:bg-stone-800/50"
+          >
+            {isFetchingMore ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Cargando...
+              </>
+            ) : (
+              "Cargar más"
+            )}
+          </Button>
+        </div>
+      )}
 
       <ModalUpdateTaskInfo
         task={tareaAEditar}

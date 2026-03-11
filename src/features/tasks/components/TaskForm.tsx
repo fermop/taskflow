@@ -2,14 +2,19 @@
 
 import { useState } from "react";
 import { auth } from "@/lib/firebase";
-import { tasksService } from "../services/tasks.service";
+import { tasksService, Task } from "../services/tasks.service";
 import { ValidationError } from "@/lib/validators";
 import { toast } from "sonner";
 import { Paperclip, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export function TaskForm({ projectId }: { projectId: string }) {
+interface TaskFormProps {
+  projectId: string;
+  onTaskCreated: (newTask: Task) => void;
+}
+
+export function TaskForm({ projectId, onTaskCreated }: TaskFormProps) {
   const [tituloTarea, setTituloTarea] = useState("");
   const [archivo, setArchivo] = useState<File | null>(null);
   const [estaGuardando, setEstaGuardando] = useState(false);
@@ -19,14 +24,29 @@ export function TaskForm({ projectId }: { projectId: string }) {
     if (!tituloTarea.trim() || !auth.currentUser) return;
 
     setEstaGuardando(true);
+    const tituloOptimista = tituloTarea.trim();
 
     try {
-      await tasksService.createTask(
+      const newTaskId = await tasksService.createTask(
         projectId,
-        tituloTarea,
+        tituloOptimista,
         auth.currentUser.uid,
         archivo
       );
+
+      // We don't have the exactly generated imageUrl from Firebase Storage instantly 
+      // without extra latency/logic, so we omit it in the optimistic UI until the next fetch.
+      // But we CAN put the task in the list immediately!
+      const newTask: Task = {
+        id: newTaskId,
+        title: tituloOptimista,
+        projectId,
+        userId: auth.currentUser.uid,
+        isCompleted: false,
+        createdAt: new Date().toISOString(),
+      };
+
+      onTaskCreated(newTask);
 
       setTituloTarea("");
       setArchivo(null);

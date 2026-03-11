@@ -21,9 +21,11 @@ import ModalConfirmDelete from "@/components/ui/ModalConfirmDelete";
 interface ProjectDropdownMenuProps {
   projectId: string;
   projectName: string;
+  onDeleted?: (id: string) => void;
+  onUpdated?: (id: string, newName: string) => void;
 }
 
-export function ProjectDropdownMenu({ projectId, projectName }: ProjectDropdownMenuProps) {
+export function ProjectDropdownMenu({ projectId, projectName, onDeleted, onUpdated }: ProjectDropdownMenuProps) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -37,6 +39,7 @@ export function ProjectDropdownMenu({ projectId, projectName }: ProjectDropdownM
       await projectsService.deleteProject(projectId, userId);
       toast.success("Proyecto eliminado correctamente");
       setShowDeleteModal(false);
+      onDeleted?.(projectId);
     } catch (error) {
       const message = error instanceof ValidationError ? error.message : "Error al eliminar el proyecto";
       toast.error(message);
@@ -91,7 +94,10 @@ export function ProjectDropdownMenu({ projectId, projectName }: ProjectDropdownM
         currentName={projectName}
         isOpen={showEditModal}
         onClose={() => setShowEditModal(false)}
-        onSuccess={() => setShowEditModal(false)}
+        onSuccess={(newName) => {
+          setShowEditModal(false);
+          onUpdated?.(projectId, newName);
+        }}
       />
 
       <ModalConfirmDelete

@@ -1,5 +1,5 @@
 import { db, storage } from "@/lib/firebase";
-import { collection, addDoc, query, where, doc, getDoc, orderBy, updateDoc, onSnapshot, getDocs, writeBatch } from "firebase/firestore";
+import { collection, addDoc, query, where, doc, getDoc, orderBy, updateDoc, getDocs, writeBatch, limit, startAfter } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { Project } from "../types/project";
 import { validateProjectName, validateId } from "@/lib/validators";
@@ -18,26 +18,32 @@ export const projectsService = {
     return null;
   },
 
-  // 2. Listen to projects in real-time
-  subscribeToProjects: (userId: string, onUpdate: (projects: Project[]) => void) => {
+  // 2. Get a paginated list of projects
+  getProjectsPage: async (userId: string, lastDoc: any = null, pageSize: number = 10) => {
     validateId(userId, "User ID");
 
-    const q = query(
+    let q = query(
       collection(db, "projects"),
       where("userId", "==", userId),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
+      limit(pageSize)
     );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const projects = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Project[];
+    if (lastDoc) {
+      q = query(q, startAfter(lastDoc));
+    }
 
-      onUpdate(projects);
-    });
+    const snapshot = await getDocs(q);
+    
+    const projects = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Project[];
 
-    return unsubscribe;
+    const lastVisible = snapshot.docs[snapshot.docs.length - 1] || null;
+    const hasMore = snapshot.docs.length === pageSize;
+
+    return { data: projects, lastVisible, hasMore };
   },
 
   // 3. Create a new project

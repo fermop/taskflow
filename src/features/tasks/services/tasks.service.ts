@@ -1,5 +1,5 @@
 import { db, storage } from "@/lib/firebase";
-import { collection, addDoc, query, where, onSnapshot, doc, updateDoc, deleteDoc, orderBy, getDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, doc, updateDoc, deleteDoc, orderBy, getDoc, getDocs, limit, startAfter } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { validateTaskTitle, validateImageFile, validateId } from "@/lib/validators";
 
@@ -41,31 +41,38 @@ export const tasksService = {
     return docRef.id;
   },
 
-  // 2. Listen to tasks in real-time
-  subscribeToTasks: (projectId: string, userId: string, onUpdate: (tasks: Task[]) => void) => {
+  // 2. Get a paginated list of tasks
+  getTasksPage: async (projectId: string, userId: string, lastDoc: any = null, pageSize: number = 15) => {
     validateId(projectId, "Project ID");
     validateId(userId, "User ID");
 
-    const q = query(
+    let q = query(
       collection(db, "tasks"),
       where("projectId", "==", projectId),
       where("userId", "==", userId),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
+      limit(pageSize)
     );
 
-    // Return the unsubscribe function for the component to clean up the listener
-    return onSnapshot(q, (snapshot) => {
-      const tasks = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Task[];
+    if (lastDoc) {
+      q = query(q, startAfter(lastDoc));
+    }
 
-      const sortedTasks = tasks.sort((a, b) =>
-        (a.isCompleted === b.isCompleted) ? 0 : a.isCompleted ? 1 : -1
-      );
+    const snapshot = await getDocs(q);
+    
+    const tasks = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Task[];
 
-      onUpdate(sortedTasks);
-    });
+    const sortedTasks = tasks.sort((a, b) =>
+      (a.isCompleted === b.isCompleted) ? 0 : a.isCompleted ? 1 : -1
+    );
+
+    const lastVisible = snapshot.docs[snapshot.docs.length - 1] || null;
+    const hasMore = snapshot.docs.length === pageSize;
+
+    return { data: sortedTasks, lastVisible, hasMore };
   },
 
   // 3. Toggle task completion
