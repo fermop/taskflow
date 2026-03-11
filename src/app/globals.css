@@ -132,7 +132,7 @@
 @utility mobile-only {
   display: flex;
 
-  @media (width >=40rem) {
+  @media (width >=48rem) {
     display: none;
   }
 }

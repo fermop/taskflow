@@ -7,7 +7,13 @@ import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Navbar } from "@/components/layout/Navbar";
-import { FolderKanban, ListChecks, Users, GitBranch, Star, Heart } from "lucide-react";
+import { FolderKanban, ListChecks, Users, GitBranch, Star, Heart, HelpCircle } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function HomePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -247,6 +253,70 @@ export default function HomePage() {
             </svg>
             Ver en GitHub
           </a>
+        </div>
+      </section>
+
+      {/* ── Preguntas Frecuentes ── */}
+      <section id="faq" className="py-24 bg-white dark:bg-stone-950 px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mx-auto mb-4">
+              <HelpCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            </div>
+            <h2 className="text-3xl font-bold text-stone-900 dark:text-stone-50 mb-4 tracking-tight">
+              Preguntas Frecuentes
+            </h2>
+            <p className="text-stone-500 dark:text-stone-400">
+              Todo lo que necesitas saber sobre TaskFlow.
+            </p>
+          </div>
+
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            <AccordionItem value="item-1" className="border border-stone-200 dark:border-stone-800 rounded-xl px-4 bg-stone-50/50 dark:bg-stone-900/50">
+              <AccordionTrigger className="text-stone-900 dark:text-stone-100 hover:no-underline font-semibold py-4 cursor-pointer">
+                ¿Qué es TaskFlow?
+              </AccordionTrigger>
+              <AccordionContent className="text-stone-500 dark:text-stone-400 pb-4 leading-relaxed">
+                TaskFlow es una herramienta de gestión de proyectos diseñada para equipos y desarrolladores que buscan simplicidad y eficiencia. Permite organizar tareas, adjuntar archivos y colaborar en tiempo real.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2" className="border border-stone-200 dark:border-stone-800 rounded-xl px-4 bg-stone-50/50 dark:bg-stone-900/50">
+              <AccordionTrigger className="text-stone-900 dark:text-stone-100 hover:no-underline font-semibold py-4 cursor-pointer">
+                ¿Es realmente gratuito?
+              </AccordionTrigger>
+              <AccordionContent className="text-stone-500 dark:text-stone-400 pb-4 leading-relaxed">
+                ¡Sí! TaskFlow es un proyecto de código abierto y su uso es completamente gratuito. Puedes usar nuestra instancia oficial o desplegar tu propia versión.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3" className="border border-stone-200 dark:border-stone-800 rounded-xl px-4 bg-stone-50/50 dark:bg-stone-900/50">
+              <AccordionTrigger className="text-stone-900 dark:text-stone-100 hover:no-underline font-semibold py-4 cursor-pointer">
+                ¿Cómo puedo contribuir?
+              </AccordionTrigger>
+              <AccordionContent className="text-stone-500 dark:text-stone-400 pb-4 leading-relaxed">
+                ¡Nos encanta recibir ayuda! Puedes contribuir reportando errores, sugiriendo funciones o enviando Pull Requests en nuestro repositorio de GitHub. No olvides dejar una estrella si te gusta.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4" className="border border-stone-200 dark:border-stone-800 rounded-xl px-4 bg-stone-50/50 dark:bg-stone-900/50">
+              <AccordionTrigger className="text-stone-900 dark:text-stone-100 hover:no-underline font-semibold py-4 cursor-pointer">
+                ¿Mis datos están seguros?
+              </AccordionTrigger>
+              <AccordionContent className="text-stone-500 dark:text-stone-400 pb-4 leading-relaxed">
+                Utilizamos Firebase para la autenticación y el almacenamiento de datos, lo que garantiza estándares de seguridad de nivel industrial. Tus datos personales y archivos están protegidos.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5" className="border border-stone-200 dark:border-stone-800 rounded-xl px-4 bg-stone-50/50 dark:bg-stone-900/50">
+              <AccordionTrigger className="text-stone-900 dark:text-stone-100 hover:no-underline font-semibold py-4 cursor-pointer">
+                ¿Puedo subir imágenes a mis tareas?
+              </AccordionTrigger>
+              <AccordionContent className="text-stone-500 dark:text-stone-400 pb-4 leading-relaxed">
+                Sí, TaskFlow permite adjuntar una imagen a cada tarea para proporcionar contexto visual. Estas imágenes se almacenan de forma segura en Firebase Storage.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 

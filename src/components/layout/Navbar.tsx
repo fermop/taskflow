@@ -32,12 +32,13 @@ export function Navbar() {
   const navLinks = [
     { href: "/#about", label: "Acerca de", alwaysShow: true },
     { href: "/#contribute", label: "Colabora", alwaysShow: true },
+    { href: "/#faq", label: "Preguntas Frecuentes", alwaysShow: true },
     ...(user
       ? [{ href: "/proyectos", label: "Ir a mis proyectos", alwaysShow: true }]
       : [
-          { href: "/login", label: "Iniciar Sesión", alwaysShow: false },
-          { href: "/register", label: "Crear Cuenta", alwaysShow: false },
-        ]),
+        { href: "/login", label: "Iniciar Sesión", alwaysShow: false },
+        { href: "/register", label: "Crear Cuenta", alwaysShow: false },
+      ]),
   ];
 
   return (
@@ -49,7 +50,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop links — hidden on mobile */}
-        <div className="hidden sm:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-1">
           <Link
             href="/#about"
             className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
@@ -61,6 +62,12 @@ export function Navbar() {
             className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
           >
             Colabora
+          </Link>
+          <Link
+            href="/#faq"
+            className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
+          >
+            Preguntas Frecuentes
           </Link>
 
           {!isAuthPage && (
