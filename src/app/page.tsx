@@ -277,7 +277,7 @@ export default function HomePage() {
                 ¿Qué es TaskFlow?
               </AccordionTrigger>
               <AccordionContent className="text-stone-500 dark:text-stone-400 pb-4 leading-relaxed">
-                TaskFlow es una herramienta de gestión de proyectos diseñada para equipos y desarrolladores que buscan simplicidad y eficiencia. Permite organizar tareas, adjuntar archivos y colaborar en tiempo real.
+                TaskFlow es una herramienta de gestión de proyectos diseñada para personas que buscan simplicidad y eficiencia. Permite organizar tareas y adjuntar archivos para una mejor organización.
               </AccordionContent>
             </AccordionItem>
 

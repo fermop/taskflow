@@ -36,8 +36,8 @@ export function Navbar() {
     ...(user
       ? [{ href: "/proyectos", label: "Ir a mis proyectos", alwaysShow: true }]
       : [
-        { href: "/login", label: "Iniciar Sesión", alwaysShow: false },
         { href: "/register", label: "Crear Cuenta", alwaysShow: false },
+        { href: "/login", label: "Iniciar Sesión", alwaysShow: false },
       ]),
   ];
 
@@ -85,16 +85,16 @@ export function Navbar() {
               ) : (
                 <>
                   <Link
-                    href="/login"
+                    href="/register"
                     className="px-3.5 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800/60 transition-all duration-200"
                   >
-                    Iniciar Sesión
+                    Crear Cuenta
                   </Link>
                   <Link
-                    href="/register"
+                    href="/login"
                     className="px-4 py-2 text-sm font-semibold rounded-lg bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-stone-200 transition-all duration-200"
                   >
-                    Crear Cuenta
+                    Iniciar Sesión
                   </Link>
                 </>
               )}
